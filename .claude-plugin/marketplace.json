@@ -1,0 +1,1 @@
+{"name":"rfstack","owner":{"name":"longjumpguy"},"metadata":{"description":"rfstack: plan, review, eval, test workflow for Claude Code"},"plugins":[{"name":"rfstack","source":"./","description":"4-step AI coding workflow"}]}
