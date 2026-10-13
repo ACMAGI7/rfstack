@@ -1,5 +1,7 @@
 # rfstack
 
+![rfstack: Plan, Review, Eval, Test](assets/poster.jpg)
+
 A Claude Code plugin that packages a 4-step AI coding workflow:
 
 1. **Plan** (`/flow-plan`) – research first (parallel subagents for bug context + repo conventions), then grill you into a one-page PRD (goal, scope, done-means) before any code.
