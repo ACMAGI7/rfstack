@@ -68,10 +68,11 @@ Scanners used by `/rf-scan` (the scan still runs with `--partial` if some are mi
 brew install gitleaks osv-scanner semgrep
 ```
 
-Turn gstack telemetry off, and turn `codex_reviews` off for client and ACMAG work. `scripts/preflight.sh` checks both and does not change them:
+Turn gstack telemetry off. For client and ACMAG work, disable codex reviews. `scripts/preflight.sh` checks both and does not change them:
 
 ```bash
 ~/.claude/skills/gstack/bin/gstack-config get telemetry   # must print off
+~/.claude/skills/gstack/bin/gstack-config set codex_reviews disabled
 ```
 
 Ponytail level full is the default. To pin it: `PONYTAIL_DEFAULT_MODE=full`, or `~/.config/ponytail/config.json` with `{"defaultMode":"full"}`.
