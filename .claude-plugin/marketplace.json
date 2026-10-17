@@ -1,1 +1,17 @@
-{"name":"rfstack","owner":{"name":"longjumpguy"},"metadata":{"description":"rfstack: plan, review, eval, test workflow for Claude Code"},"plugins":[{"name":"rfstack","source":"./","description":"4-step AI coding workflow"}]}
+{
+  "name": "rfstack",
+  "owner": {
+    "name": "ACMAGI7"
+  },
+  "metadata": {
+    "description": "rfstack: plan, review, eval, test, plus rf-new, rf-audit and rf-scan"
+  },
+  "allowCrossMarketplaceDependenciesOn": ["ponytail", "pstack-claude"],
+  "plugins": [
+    {
+      "name": "rfstack",
+      "source": "./",
+      "description": "Plan, review, eval, test, and lean quality and security checks"
+    }
+  ]
+}
