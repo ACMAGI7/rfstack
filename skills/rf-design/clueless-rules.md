@@ -4,6 +4,9 @@ Source: `ACMAGI7/Clueless-Design-System-Universal/CLUELESS-DESIGN-RULES.md`, v1.
 Pinned sha: `e52b1b5821f3a866546b61a5a1ed146ea6c5dfaf`
 Numbers are copied verbatim; the source wins on any difference. macOS is the reference. **[NEW]** = proposal, not shipped (all iPad Touch values). Gates: `npm run check` (stylelint, ESLint, design-debt) and `npm run test:visual` (density, home-board, notices, settings, a11y).
 
+## Apply by target
+Spacing, control sizes, hit targets and §Proportion are app UI (macOS, iPadOS, Windows, `proto/ui`). Marketing website pages use the Website lines only: container 1180 (today 1160), no horizontal overflow at 390 px, buttons may be 48 px or taller (44 min on a phone). Do not apply the app px list or the height÷font band on those pages. "50–52 px CTAs become xl (36)" maps app controls; it does not cap website buttons.
+
 ## Spacing (§5.1)
 Allowed px: **2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 80** (`--sp-N`).
 Roles: 2/6 icon-to-label, badge-to-edge · 8 inner stacks · 12 dense card padding · 16 between controls · 24 between groups, Settings page padding · 40 screen padding · 48 between blocks · 80 page margins. 4/20/32: no stated role.

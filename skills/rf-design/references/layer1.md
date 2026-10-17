@@ -11,12 +11,14 @@
 | Heavy effects | `backdrop-filter`/`filter: blur()` over large or animated areas; very large `box-shadow` | `.blur()`, `.ultraThinMaterial` over full-screen animated views | `RenderEffect` blur on large views | `AcrylicBrush` on animated surfaces |
 | Safe areas | fixed/sticky bottom bars without `env(safe-area-inset-bottom)`; no `viewport-fit=cover` | `.ignoresSafeArea()` on bars with controls | no `WindowInsets` handling with edge-to-edge | — |
 | Number columns | no `tabular-nums`; hand-built `"$" + n`; `toFixed` for money display | string-built currency instead of `.formatted(.currency)` | `String.format` instead of `NumberFormat` | `ToString()` without culture |
+Physical left/right on direction-sensitive properties is a warning only when the project ships or plans a right-to-left language; otherwise an info note, not a warning.
+
 Token files (JSON, CSS variables, Tailwind config): check the values themselves against Layer 1 (e.g. button height ÷ font, focus ring present, input font ≥ 16 px on phones).
 
 ## Sources for every number
 | Number | Source |
 |---|---|
-| 24 × 24 CSS px target | WCAG 2.2 SC 2.5.8 Target Size (Minimum), AA |
+| 24 × 24 CSS px target | WCAG 2.2 SC 2.5.8 Target Size (Minimum), AA. Interactive controls only; inline text links in a sentence are exempt |
 | 44 × 44 pt touch target | Apple Human Interface Guidelines (advisory) |
 | 48 × 48 dp touch target | Material Design accessibility (advisory) |
 | 4.5:1 body, 3:1 large text | WCAG 2.2 SC 1.4.3 Contrast (Minimum); large = 18 pt (24 px) or 14 pt (≈18.66 px) bold |
