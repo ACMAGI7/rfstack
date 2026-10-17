@@ -18,6 +18,8 @@ v0.2 commands, lean unless you pass `--deep`:
 - `/rf-new` – start work on a branch named `rf/<slug>`.
 - `/rf-audit` – read-only quality check. `--diff <base>` looks only at what the branch changed.
 - `/rf-scan` – scanners first (gitleaks, osv-scanner, semgrep, Supabase advisors), then a short AI review. `--partial` continues when a scanner is not installed.
+- `/rf-design` – read-only design check for any website or app, in any language and on any screen size. It checks spacing, proportions, alignment, zoom, narrow screens, contrast and motion, and never changes colours, fonts or brand.
+  Layer 1 is universal and always runs. Layer 2 checks the project's own `DESIGN.md` (Clueless repos use `skills/rf-design/clueless-rules.md`). `--all` writes a whole-app baseline; `--release` checks three browsers.
 
 Recipes name skills in full (`pstack:tdd`, `ponytail:ponytail-audit`). They do not copy those skills into this repo.
 
