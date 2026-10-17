@@ -1,1 +1,19 @@
-{"name":"rfstack","version":"0.1.0","description":"4-step AI coding workflow: plan (grill), adversarial review, rubric eval, test+repair.","license":"MIT","repository":"https://github.com/longjumpguy/rfstack"}
+{
+  "name": "rfstack",
+  "version": "0.2.0",
+  "description": "Plan, review, eval, test, plus lean /rf-new, /rf-audit and /rf-scan. Ponytail level full stays on.",
+  "license": "MIT",
+  "repository": "https://github.com/ACMAGI7/rfstack",
+  "dependencies": [
+    {
+      "name": "ponytail",
+      "marketplace": "ponytail",
+      "version": ">=5.3.0"
+    },
+    {
+      "name": "pstack",
+      "marketplace": "pstack-claude",
+      "version": ">=0.9.90"
+    }
+  ]
+}

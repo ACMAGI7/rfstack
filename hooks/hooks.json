@@ -1,0 +1,26 @@
+{
+  "description": "If ponytail is missing or off, switch it back to full. Startup also says ponytail decides how much code to write and pstack decides the routine.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact|fork",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-}\" ]; then bash \"${CLAUDE_PLUGIN_ROOT}/hooks/ponytail-guard.sh\" startup; else echo \"Ponytail level full is active for this whole command, including helper agents.\"; fi"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-}\" ]; then bash \"${CLAUDE_PLUGIN_ROOT}/hooks/ponytail-guard.sh\"; else echo \"Ponytail level full is active for this whole command, including helper agents.\"; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
