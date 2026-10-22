@@ -1,0 +1,33 @@
+# Step 1 trigger: client sign-off. Run by hand (Actions tab) or via repository_dispatch "client-signoff".
+name: client-signoff
+on:
+  workflow_dispatch:
+    inputs:
+      client: {description: "Client name", required: true}
+      scope: {description: "Signed-off scope", required: true}
+      who: {description: "Who struggles", required: false}
+      what: {description: "To do what", required: false}
+      obstacle: {description: "Because of what obstacle", required: false}
+      cost: {description: "Costing what", required: false}
+      dry_run: {description: "1 = print only", default: "1"}
+  repository_dispatch:
+    types: [client-signoff]
+permissions: {contents: read}
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    env:
+      CLIENT: ${{ inputs.client || github.event.client_payload.client }}
+      SCOPE: ${{ inputs.scope || github.event.client_payload.scope }}
+      WHO: ${{ inputs.who || github.event.client_payload.who }}
+      WHAT: ${{ inputs.what || github.event.client_payload.what }}
+      OBSTACLE: ${{ inputs.obstacle || github.event.client_payload.obstacle }}
+      COST: ${{ inputs.cost || github.event.client_payload.cost }}
+      DRY_RUN: ${{ inputs.dry_run || github.event.client_payload.dry_run || '1' }}
+      GH_TOKEN: ${{ secrets.PIPELINE_GH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: pipeline/scripts/make-brief.sh
+      - run: pipeline/scripts/create-workspace.sh
+      - uses: actions/upload-artifact@v4
+        with: {name: brief, path: out/}
