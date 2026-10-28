@@ -60,5 +60,5 @@ The report starts with a 3-line summary for Chase. Then show the cost from ponyt
 - Ponytail level full is active for this whole command, including helper agents. Put that same sentence in every helper agent prompt.
 - Never merge or push to `main` or `master` without an explicit yes in this chat.
 - No secrets in files, commits, logs, or the report. Redact any leaked key to its prefix.
-- Gstack telemetry stays off. Do not turn on `codex_reviews`.
+- Gstack telemetry stays off. Keep codex reviews disabled with `gstack-config set codex_reviews disabled`.
 - Stopping ponytail is allowed. The next `/rf-*` or `/flow*` command turns level full back on in step 0.

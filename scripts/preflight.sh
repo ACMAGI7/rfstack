@@ -44,7 +44,7 @@ if [ -x "$cfg" ]; then
   tel=$(norm "$("$cfg" get telemetry 2>/dev/null || true)")
   codex=$(norm "$("$cfg" get codex_reviews 2>/dev/null || true)")
   [ "$tel" = "off" ] || stop "gstack telemetry is not off (got: ${tel:-empty}). Turn it off. This check does not change settings."
-  [ "$codex" = "off" ] || stop "gstack codex_reviews is not off (got: ${codex:-empty}). Turn it off. This check does not change settings."
+  [ "$codex" = "disabled" ] || [ "$codex" = "off" ] || stop "gstack codex_reviews is not disabled (got: ${codex:-empty}). Run: gstack-config set codex_reviews disabled. This check does not change settings."
 else echo "note: gstack-config not found; telemetry not active"; fi
 if [ "$scanners" = 1 ]; then
   miss=()
