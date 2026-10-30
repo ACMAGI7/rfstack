@@ -1,0 +1,37 @@
+# Copy into a client repo as .github/workflows/pr-loop.yml. Job name "checks" = required status check.
+name: pr-loop
+on: {pull_request: {types: [opened, synchronize, reopened]}}
+permissions: {contents: read, pull-requests: write, issues: write}
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 20, cache: npm}
+      - name: install, lint, typecheck, test
+        run: |
+          set -o pipefail
+          { npm ci && npm run lint --if-present && (npx tsc --noEmit || [ ! -f tsconfig.json ]) && npm test --if-present; } 2>&1 | tee ci.log
+      - name: bounce failure back to the coding agent
+        if: failure()
+        env: {GH_TOKEN: "${{ github.token }}", PR: "${{ github.event.number }}", MAX: "5"}
+        run: |
+          tries=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate -q '[.[]|select(.body|startswith("<!-- pr-loop -->"))]|length')
+          tries=$((tries+1))
+          { echo "<!-- pr-loop -->"; echo "**Checks failed (try $tries/$MAX).** Fix and push again."; echo '```'; tail -n 80 ci.log; echo '```'; } > c.md
+          gh pr comment "$PR" -F c.md
+          if [ "$tries" -ge "$MAX" ]; then gh pr edit "$PR" --remove-label needs-fix --add-label needs-human
+          else gh pr edit "$PR" --add-label needs-fix; fi
+      - name: clear needs-fix on green
+        if: success()
+        env: {GH_TOKEN: "${{ github.token }}"}
+        run: gh pr edit "${{ github.event.number }}" --remove-label needs-fix || true
+  ai-review:
+    # Optional first-pass AI review. Skipped unless secret AI_REVIEW_KEY exists.
+    runs-on: ubuntu-latest
+    needs: checks
+    env: {AI_REVIEW_KEY: "${{ secrets.AI_REVIEW_KEY }}"}
+    steps:
+      - if: env.AI_REVIEW_KEY != ''
+        run: echo "TODO: call review bot with the PR diff and post a comment (advisory only, not a gate)."

@@ -1,0 +1,15 @@
+# Copy into a client repo. Runs only after a reviewed merge lands on main.
+name: deploy
+on: {push: {branches: [main]}}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: deploy (stub)
+        env: {VERCEL_TOKEN: "${{ secrets.VERCEL_TOKEN }}", RAILWAY_TOKEN: "${{ secrets.RAILWAY_TOKEN }}"}
+        run: |
+          echo "TODO: pick one target."
+          # Vercel:  npx vercel deploy --prod --token "$VERCEL_TOKEN"
+          # Railway: npx @railway/cli up --service "$RAILWAY_SERVICE"
